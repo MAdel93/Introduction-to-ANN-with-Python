@@ -29,15 +29,11 @@ In an ANN, the neuron is the fundamental computational unit. The mathematical mo
 
 1. **Weighted Input Summation**: Each input \( x_j \) is multiplied by its corresponding synaptic weight \( w_{kj} \). The sum of all weighted inputs, along with the bias \( b_k \), forms the net input \( u_k \):
 
-   \[
-   u_k = \sum_{j=1}^{m} w_{kj} x_j + b_k
-   \]
+![image](https://github.com/user-attachments/assets/1a5e1313-8dc3-40a9-a506-b6f2ad9b14d4)
 
 2. **Activation Function**: The net input is passed through an activation function to produce the output \( y_k \):
 
-   \[
-   y_k = \phi(u_k)
-   \]
+![image](https://github.com/user-attachments/assets/9b020406-2e66-43b4-9e5b-fadf8965a693)
 
 ![Perceptron](https://user-images.githubusercontent.com/118474020/202779325-65d108e4-6e10-49c7-9ec8-9c98bcff53c5.png)
 
@@ -47,64 +43,46 @@ In an ANN, the neuron is the fundamental computational unit. The mathematical mo
 
 1. **Sigmoid Activation Function**:
    - The **sigmoid** function is continuous and smoothly transitions from 0 to 1. It is often used when the network is required to output probabilities.
-   - **Equation**:
    
-     \[
-     \phi(u_k) = \frac{1}{1 + e^{-u_k}}
-     \]
+![image](https://github.com/user-attachments/assets/6d343a10-fe6e-412e-89cd-44e0d57f234e)
+
      
      The output ranges between 0 and 1, making it useful in scenarios where binary-like outputs are needed but in a continuous form.
 
 2. **Hyperbolic Tangent (Tanh) Activation Function**:
    - The **tanh** function is similar to the sigmoid function but has an output range between -1 and 1. It provides stronger gradients for optimization and allows negative output values.
-   - **Equation**:
    
-     \[
-     \phi(u_k) = \tanh(u_k) = \frac{e^{u_k} - e^{-u_k}}{e^{u_k} + e^{-u_k}}
-     \]
+     ![image](https://github.com/user-attachments/assets/98a8aea0-5cc6-4836-ab14-02ea9862bf8a)
+
 
    This function is used when the network needs to differentiate between positive and negative inputs or outputs.
 
 3. **Rectified Linear Unit (ReLU) Activation Function**:
    - The **ReLU** function is widely used in deep learning because it mitigates the vanishing gradient problem and allows networks to converge faster. It outputs the input directly if it is positive and zero otherwise.
-   - **Equation**:
-   
-     \[
-     \phi(u_k) = \max(0, u_k)
-     \]
+
+    ![image](https://github.com/user-attachments/assets/a3d40b50-be69-412a-89b5-7f7f0f6a314b)
+
    
      ReLU is not bounded, meaning its output can go from 0 to infinity, making it ideal for models that require large positive output ranges.
 
 4. **Leaky ReLU Activation Function**:
    - To address the "dying ReLU" problem where neurons may stop activating entirely, **Leaky ReLU** introduces a small slope for negative values.
-   - **Equation**:
-   
-     \[
-     \phi(u_k) = \begin{cases} 
-     u_k & \text{if } u_k \geq 0 \\
-     \alpha u_k & \text{if } u_k < 0
-     \end{cases}
-     \]
+
+   ![image](https://github.com/user-attachments/assets/a8acf132-5c4d-4c44-b3fd-b1a0bec2f4d4)
    
      Where \( \alpha \) is a small positive constant (e.g., 0.01).
 
 5. **Softmax Activation Function**:
    - **Softmax** is typically used in the output layer of classification networks where multiple classes are predicted. It converts a vector of values into probabilities, making it useful in multi-class classification.
-   - **Equation**:
-   
-     \[
-     \phi(u_k) = \frac{e^{u_k}}{\sum_{i=1}^{n} e^{u_i}}
-     \]
+
+   ![image](https://github.com/user-attachments/assets/7e61c585-a360-4d27-9b19-9c6d1ed981e2)
    
      The output of the softmax function is a probability distribution over multiple classes, where the sum of all outputs equals 1.
 
 6. **Swish Activation Function**:
    - **Swish** is a newer activation function that has been found to perform better than ReLU in some networks. It is defined as a combination of the input and a sigmoid function:
-   - **Equation**:
-   
-     \[
-     \phi(u_k) = u_k \cdot \frac{1}{1 + e^{-u_k}}
-     \]
+
+   ![image](https://github.com/user-attachments/assets/4698d67a-6dee-42d1-b78c-63d13e15bc29)
    
      This smooth, non-monotonic function can enhance the performance of deep networks.
 
@@ -117,39 +95,26 @@ The perceptron model can be mathematically expressed as:
 
 1. **Net Input**: The net input to the perceptron is the weighted sum of inputs plus a bias term:
 
-   \[
-   u = \sum_{j=1}^{m} w_j x_j + b
-   \]
+![image](https://github.com/user-attachments/assets/8ab0fc13-bd20-4397-a086-25dcf89a0aa1)
+
 
 2. **Output**: The output of the perceptron is a binary value determined by a step function (sign function):
 
-   \[
-   y = \text{sgn}(u)
-   \]
+![image](https://github.com/user-attachments/assets/38511a1f-28f7-4161-bbc3-a6b74cea4d17)
 
    Where:
 
-   \[
-   \text{sgn}(u) = 
-   \begin{cases} 
-   +1, & \text{if } u > 0 \\
-   -1, & \text{if } u \leq 0 
-   \end{cases}
-   \]
+![image](https://github.com/user-attachments/assets/c4bf2056-e8ce-4795-8462-8fca6f57c0e8)
 
 3. **Weight Update Rule**: The synaptic weights are updated using the following rule:
 
-   \[
-   w_j(t+1) = w_j(t) + \eta \cdot (d - y) \cdot x_j
-   \]
+![image](https://github.com/user-attachments/assets/44943ae0-359e-4491-9dff-c3eed2d8d9c1)
 
    Where \( t \) is the iteration number, and \( \eta \) is the learning rate.
 
 4. **Bias Update Rule**: The bias term is also updated similarly:
 
-   \[
-   b(t+1) = b(t) + \eta \cdot (d - y)
-   \]
+![image](https://github.com/user-attachments/assets/bcf5a0a4-7816-4969-994f-0598f3cb0f6b)
 
 This algorithm ensures that the perceptron converges if the training data is linearly separable.
 
@@ -157,9 +122,7 @@ This algorithm ensures that the perceptron converges if the training data is lin
 
 The perceptron convergence theorem states that if the training data is linearly separable, the perceptron algorithm will find a set of weights that correctly classify all the training examples. This means that after a finite number of iterations, the decision boundary will be positioned to separate the two classes of data. The decision boundary for a perceptron is a hyperplane defined by:
 
-\[
-\sum_{j=1}^{m} w_j x_j + b = 0
-\]
+![image](https://github.com/user-attachments/assets/4f7574f8-fc78-43c0-8b30-593d8e6f95c3)
 
 This hyperplane separates the input space into two regions, one for each class.
 
